@@ -156,7 +156,7 @@ class Trunc : public UnaryOperator
         Trunc() : UnaryOperator() {};
         Trunc(Base* cory) : UnaryOperator(cory){};
         string stringify();
-        double evaluate() {return;};
+        double evaluate() {return->evaluate();};
 };
 
 class Paren : public UnaryOperator
@@ -164,7 +164,7 @@ class Paren : public UnaryOperator
     public: 
         Paren(Base* cory) : UnaryOperator(cory){};
         string stringify();
-        double evaluate() {return;};
+        double evaluate() {return cory->evaluate();};
 };
 
 #endif
