@@ -126,10 +126,6 @@ double Pow::evaluate() { return pow(this-> left  -> evaluate() , this-> right  -
 void Pow::accept(CountVisitor* a) { a->visit_pow(); };
 
 //**Root Class**
-Root::Root() : UnaryOperator() { }
-
-Root::Root(Base* child) : UnaryOperator(child) { }
-
 
 string Root::stringify() { cout << "ROOT"; }
 
