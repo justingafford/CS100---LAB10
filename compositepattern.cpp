@@ -19,6 +19,19 @@ double Op::evaluate() { return this->value; }
 
 Iterator* Op::create_iterator() { return new NullIterator(this); }
 
+
+Base* Rand::get_left() { return NULL; }
+
+Base* Rand::get_right() { return NULL; }
+
+Rand::Rand() {num = rand() % 100;};
+ 
+double Rand::evaluate() {return num;}
+ 
+string Rand::stringify() {return to_string(num);}
+
+Iterator* Rand::create_iterator() { return new NullIterator(this); }
+
 //**Operator Base Class**
 Operator::Operator() : Base(){ }
 
