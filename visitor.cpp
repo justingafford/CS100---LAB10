@@ -1,5 +1,5 @@
 #include "visitor.hpp"
-CountVisitor(){}
+CountVisitor::CountVisitor(){}
 
 void CountVisitor::visit_op()
 {
