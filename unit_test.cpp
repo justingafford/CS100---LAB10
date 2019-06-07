@@ -54,20 +54,27 @@ TEST(IteratorTests, PreOrderIter) {
   Add* add = new Add(op3, op4); //7
   Pow* pow  = new Pow(add,op2); //49
   Root* root = new Root(pow);
-  PreOrderIterator* pre_itr = new PreOrderIterator(root);
+PreOrderIterator* pre_itr = new PreOrderIterator(root);
   pre_itr->first();
   EXPECT_EQ(pre_itr->current()->stringify(),"3.000000 + 4.000000 ** 2.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"3.000000 + 4.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"3.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"4.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"2.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->is_done(),1);
-
+  EXPECT_EQ(counter->add_count(),1);
+  EXPECT_EQ(counter->pow_count(),1);
+  EXPECT_EQ(counter->op_count(),3);
 }
 
 TEST(OpTests, Test1)
