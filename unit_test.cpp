@@ -1,9 +1,12 @@
-
-#include "compositepattern.h"
+#include"compositepattern.h"
+#include"compositepattern.cpp"
+#include "visitor.hpp"
+#include "visitor.cpp"
 #include "iterator.h"
+#include "iterator.cpp"
 #include <iostream>
 #include "gtest/gtest.h"
-#include "visitor.hpp"
+
 
 TEST(IteratorTests, BinaryIter) {
   Op* op2 = new Op(69);
@@ -74,6 +77,39 @@ TEST(IteratorTests, PreOrderIter) {
   EXPECT_EQ(counter->pow_count(),1);
   EXPECT_EQ(counter->op_count(),3);
 }
+
+TEST(AddTests, Test1)  
+{
+    Base* op1 = new Op(13);
+    Base* op2 = new Op(75);
+    Base* add1 = new Add(op1,op2);
+    CountVisitor *a = new CountVisitor();
+    PreOrderIterator *b = new PreOrderIterator(add1);
+
+    b->first();
+    while(b->is_done() == false)
+    {
+	  b->current()->accept(a);
+	  b->next();
+    }
+
+    EXPECT_EQ(a->op_count(),2);
+    EXPECT_EQ(a->add_count(), 1);
+}
+
+TEST(OpTests, Test1)
+{
+    Base* op1 = new Op(13);
+    CountVisitor *a = new CountVisitor();
+    PreOrderIterator *b = new PreOrderIterator(op1);
+
+    b->first();
+    b->current()->accept(a);
+
+    EXPECT_EQ(a->op_count(),1);
+    
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
