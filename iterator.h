@@ -1,6 +1,7 @@
 #ifndef ITERATOR_CLASSES
 #define ITERATOR_CLASSES
 #include "compositepattern.h"
+#include "visitor.h"
 #include <string>
 #include <stack>
 
