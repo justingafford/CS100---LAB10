@@ -73,7 +73,6 @@ PreOrderIterator* pre_itr = new PreOrderIterator(root);
   EXPECT_EQ(counter->pow_count(),1);
   EXPECT_EQ(counter->op_count(),3);
 }
-<<<<<<< HEAD
 /*
 =======
 
