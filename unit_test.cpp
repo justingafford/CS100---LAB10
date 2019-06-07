@@ -51,7 +51,8 @@ TEST(IteratorTests, PreOrderIter) {
   Add* add = new Add(op3, op4); //7
   Pow* pow  = new Pow(add,op2); //49
   Root* root = new Root(pow);
-PreOrderIterator* pre_itr = new PreOrderIterator(root);
+  CountVisitor* counter = new CountVisitor();
+  PreOrderIterator* pre_itr = new PreOrderIterator(root);
   pre_itr->first();
   EXPECT_EQ(pre_itr->current()->stringify(),"3.000000 + 4.000000 ** 2.000000");
   pre_itr->current()->accept(counter);
