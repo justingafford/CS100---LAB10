@@ -6,7 +6,7 @@
 #include <math.h>
 #include <string>
 #include "iterator.h"
-
+#include "visitor.hpp"
 using namespace std;
 
 class Iterator;
