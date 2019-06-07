@@ -133,8 +133,8 @@ class Pow: public Operator {
 
 class Root: public UnaryOperator {
     public:
-        Root();
-        Root(Base* root);
+        Root::Root() : UnaryOperator() { }
+	Root(Base* child) : UnaryOperator(child) { }
         void accept(CountVisitor* a);
 	string stringify();
         double evaluate();
