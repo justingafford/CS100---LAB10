@@ -21,6 +21,7 @@ class Base {
         //virtual
         virtual string stringify() = 0;
         virtual double evaluate() = 0;
+        virtual void accept(CountVisitor* a) = 0;
         virtual Iterator* create_iterator() = 0;
         virtual Base* get_left() = 0;
         virtual Base* get_right() = 0;
@@ -66,6 +67,7 @@ class Operator: public Base {
 
         Base* get_left();
         Base* get_right();
+        virtual void accept(CountVisitor* a) = 0;
         virtual double evaluate() = 0;	//Note: this is implicit in the inheritance, but can also be made explicit
         Iterator* create_iterator();
 };
@@ -79,6 +81,7 @@ class UnaryOperator: public Base {
 
         Base* get_left();
         Base* get_right();
+        virtual void accept(CountVisitor* a) = 0;
         virtual double evaluate() = 0;	//Note: this is implicit in the inheritance, but can also be made explicit
         Iterator* create_iterator();
 };
