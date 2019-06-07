@@ -19,6 +19,7 @@ double Op::evaluate() { return this->value; }
 
 Iterator* Op::create_iterator() { return new NullIterator(this); }
 
+void Op::accept(CountVisitor* a) { a->visit_op(); };
 
 Base* Rand::get_left() { return NULL; }
 
@@ -27,6 +28,9 @@ Base* Rand::get_right() { return NULL; }
 Rand::Rand() {num = rand() % 100;};
  
 double Rand::evaluate() {return num;}
+
+void Rand::accept(CountVisitor* a) { a->visit_rand(); };
+
  
 string Rand::stringify() {return to_string(num);}
 
@@ -63,6 +67,7 @@ string Add::stringify() {
 	string temp = left ->stringify() + " + " + right ->stringify();
 	return temp;
 }
+void Add::accept(CountVisitor* a) { a->visit_add(); };
 
 double Add::evaluate() { return this->left->evaluate() + this->right->evaluate(); }
 
@@ -70,6 +75,7 @@ double Add::evaluate() { return this->left->evaluate() + this->right->evaluate()
 Sub::Sub() : Operator() { }
 
 Sub::Sub(Base* left, Base* right) : Operator(left,right) { }
+void Sub::accept(CountVisitor* a) { a->visit_sub(); };
 
 string Sub::stringify() {
 	string temp = left ->stringify() + " - " + right ->stringify();
@@ -83,6 +89,7 @@ double Sub::evaluate() { return this->left->evaluate() - this->right->evaluate()
 Mult::Mult() : Operator() { }
 
 Mult::Mult(Base* left, Base* right) : Operator(left,right) { }
+void Mult::accept(CountVisitor* a) { a->visit_mult(); };
 
 string Mult::stringify() {
 	string temp = left ->stringify() + " + " + right ->stringify();
@@ -101,6 +108,7 @@ string Div::stringify() {
 	string temp = left ->stringify() + " / " + right ->stringify();
 	return temp;
 }
+void Div::accept(CountVisitor* a) { a->visit_div(); };
 
 double Div::evaluate() { return this->left->evaluate() / this->right->evaluate(); }
 
@@ -115,6 +123,7 @@ string Pow::stringify() {
 }
 
 double Pow::evaluate() { return pow(this-> left  -> evaluate() , this-> right  -> evaluate()); }
+void Pow::accept(CountVisitor* a) { a->visit_pow(); };
 
 //**Root Class**
 Root::Root() : UnaryOperator() { }
@@ -130,24 +139,34 @@ double Ceil::evaluate()
 {
     return ceil(child->evaluate());
 }
+void Ceil::accept(CountVisitor* a) { a->visit_ceil(); };
 
 double Floor::evaluate()
 {
     return floor(child->evaluate());
 }
 
+void Floor::accept(CountVisitor* a) { a->visit_floor(); };
+
 double Abs::evaluate()
 {
     return abs(child->evaluate());
 }
+
+void Abs::accept(CountVisitor* a) { a->visit_abs(); };
 
 string Trunc::stringify()
 {
     return to_string(child->evaluate());
 }
 
+void Trunc::accept(CountVisitor* a) { a->visit_trunc(); };
+
 string Paren::stringify()
 {
     string temp = "(" + child->stringify() + ")";
     return temp;
 }
+
+void Paren::accept(CountVisitor* a) { a->visit_paren(); };
+
