@@ -45,6 +45,7 @@ TEST(IteratorTests, NullIter) {
 }
 
 TEST(IteratorTests, PreOrderIter) {
+  CountVisitor* counter = new CountVisitor();
   Op* op3 = new Op(3);
   Op* op4 = new Op(4);
   Op* op2 = new Op(2);
@@ -54,17 +55,24 @@ TEST(IteratorTests, PreOrderIter) {
   PreOrderIterator* pre_itr = new PreOrderIterator(root);
   pre_itr->first();
   EXPECT_EQ(pre_itr->current()->stringify(),"3.000000 + 4.000000 ** 2.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"3.000000 + 4.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"3.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"4.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->current()->stringify(),"2.000000");
+  pre_itr->current()->accept(counter);
   pre_itr->next();
   EXPECT_EQ(pre_itr->is_done(),1);
-
+  EXPECT_EQ(counter->add_count(),1);
+  EXPECT_EQ(counter->pow_count(),1);
+  EXPECT_EQ(counter->op_count(),3);
 }
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
