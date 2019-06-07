@@ -114,26 +114,26 @@ double Root::evaluate() { return this->child->evaluate(); }
 
 double Ceil::evaluate()
 {
-    return ceil(c->evaluate());
+    return ceil(child->evaluate());
 }
 
 double Floor::evaluate()
 {
-    return floor(c->evaluate());
+    return floor(child->evaluate());
 }
 
 double Abs::evaluate()
 {
-    return abs(c->evaluate());
+    return abs(child->evaluate());
 }
 
 string Trunc::stringify()
 {
-    return to_string(c->evaluate());
+    return to_string(child->evaluate());
 }
 
 string Paren::stringify()
 {
-    string temp = "(" + c->stringify() + ")";
+    string temp = "(" + child->stringify() + ")";
     return temp;
 }
