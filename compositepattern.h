@@ -34,10 +34,24 @@ class Op: public Base {
     public:
         Op();
         Op(double val);
-
+        void accept(CountVisitor*) { visit_op() };
         Base* get_left();
         Base* get_right();
         double evaluate(); 
+        string stringify();
+        Iterator* create_iterator();
+};
+
+class Rand : public Base
+{
+    private:
+        double num;
+    public:
+        Rand();
+        void accept(CountVisitor*) { visit_rand() };
+        Base* get_left();
+        Base* get_right();
+        double evaluate();
         string stringify();
         Iterator* create_iterator();
 };
@@ -74,7 +88,7 @@ class Add: public Operator {
     public:
         Add();
         Add(Base* left, Base* right);
-
+        void accept(CountVisitor*) { visit_add() };
         string stringify();
         double evaluate();
 };
@@ -83,7 +97,7 @@ class Sub: public Operator {
     public:
         Sub();
         Sub(Base* left, Base* right);
-
+        void accept(CountVisitor*) { visit_sub() };
         string stringify();
         double evaluate();
 };
@@ -92,7 +106,7 @@ class Mult: public Operator {
     public:
         Mult();
         Mult(Base* left, Base* right);
-
+        void accept(CountVisitor*) { visit_mult() };
         string stringify();
         double evaluate();
 };
@@ -101,7 +115,7 @@ class Div: public Operator {
      public:
         Div();
         Div(Base* left, Base* right);
-
+        void accept(CountVisitor*) { visit_div() };
         string stringify();
         double evaluate();
 };
@@ -109,7 +123,7 @@ class Pow: public Operator {
     public:
         Pow();
         Pow(Base* left, Base* right);
-
+        void accept(CountVisitor*) {visit_pow() };
         string stringify();
         double evaluate();
 };
@@ -128,6 +142,7 @@ class Ceil : public UnaryOperator
     public: 
         Ceil() : UnaryOperator() {};
         Ceil(Base* cory) : UnaryOperator(cory){};
+        void accept(CountVisitor*) { visit_ceil(); };
         double evaluate();
         string stringify() {};
 };
@@ -137,6 +152,7 @@ class Floor : public UnaryOperator
     public: 
         Floor() : UnaryOperator() {};
         Floor(Base* cory) : UnaryOperator(cory){};
+        void accept(CountVisitor*) { visit_floor(); }
         double evaluate();
         string stringify() {};
 };
@@ -146,6 +162,7 @@ class Abs : public UnaryOperator
     public: 
         Abs() : UnaryOperator() {};
         Abs(Base* cory) : UnaryOperator(cory){};
+        void accept(CountVisitor*) { visit_abs(); };
         double evaluate();
         string stringify() {};
 };
@@ -155,6 +172,7 @@ class Trunc : public UnaryOperator
     public: 
         Trunc() : UnaryOperator() {};
         Trunc(Base* cory) : UnaryOperator(cory){};
+        void accept(CountVisitor*) {visit_trunc(); };
         string stringify();
         double evaluate() {return child->evaluate();};
 };
@@ -163,6 +181,7 @@ class Paren : public UnaryOperator
 {
     public: 
         Paren(Base* cory) : UnaryOperator(cory){};
+        void accept(CountVisitor*) { visit_paren(); };
         string stringify();
         double evaluate() {return child->evaluate();};
 };
