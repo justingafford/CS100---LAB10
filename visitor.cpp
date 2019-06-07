@@ -5,7 +5,7 @@ void CountVisitor::visit_op()
 {
     ops++;
 }
-int op_count()
+int CountVisitor::op_count()
 {
     return ops;
 }
