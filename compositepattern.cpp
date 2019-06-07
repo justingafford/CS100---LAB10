@@ -1,6 +1,7 @@
 #include "iterator.h"
 #include "compositepattern.h"
 #include <string>
+#include <cmath>
 //**Op Class**
 Op::Op() : Base(), value(0){}
 
